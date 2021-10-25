@@ -48,8 +48,9 @@
         }
 
         function enviarAParent(msgEnviar){
+          var domain = 'file://';
           if ( window.location !== window.parent.location ) {
-            parent.postMessage(msgEnviar);
+            parent.postMessage(msgEnviar.domain);
           } else {
             // The page is not in an iframe
           }
