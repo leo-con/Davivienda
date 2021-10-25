@@ -49,7 +49,7 @@
 
         function enviarAParent(msgEnviar){
           if ( window.location !== window.parent.location ) {
-            //parent.postMessage(msgEnviar);
+            parent.postMessage(msgEnviar);
           } else {
             // The page is not in an iframe
           }
