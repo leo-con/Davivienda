@@ -51,7 +51,7 @@
           const message = msgEnviar;
           const messageObj = {message: message};
           const stringifiedMessageObj = JSON.stringify(messageObj);
-          if ( webkit !== undefined){
+          if ( typeof webkit !== 'undefined' ){
             webkit.messageHandlers.cordova_iab.postMessage(stringifiedMessageObj);
             console.log('evento enviado a contenedor - webkit');
             }
@@ -70,6 +70,9 @@
            // When HTML/DOM elements are ready:
            if (event.target.readyState === "interactive") {  
                //alert("hi 1");
+               console.log("--- readystatechange --- ");
+               console.log(window.location);
+               console.log(window.parent.location);
                enviarAParent("pagina cargada");
            }
            // When window loaded ( external resources are loaded too- `css`,`src`, etc...) 
@@ -107,7 +110,7 @@
 
     <!-- Messenger Snipp End -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="">ethack v110</a>
+      <a class="navbar-brand" href="">ethack v111</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>
       </button>
