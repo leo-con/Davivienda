@@ -48,13 +48,25 @@
         }
 
         function enviarAParent(msgEnviar){
-          var domain = 'file://';
-          if ( window.location !== window.parent.location ) {
-            parent.postMessage(msgEnviar,domain);
-          } else {
-            // The page is not in an iframe
-          }
+          const message = msgEnviar
+          const messageObj = {message: message}
+          const stringifiedMessageObj = JSON.stringify(messageObj)
+          if (window.webkit && Window.webkit.messageHandlers) {
+              console.log('enviando evento a contenedor')
+              window.webkit.messageHandlers.cordova_iab.postMessage(stringifiedMessageObj)
+            }
         }
+
+        document.addEventListener('readystatechange', event => { 
+           // When HTML/DOM elements are ready:
+           if (event.target.readyState === "interactive") {  
+               //alert("hi 1");
+           }
+           // When window loaded ( external resources are loaded too- `css`,`src`, etc...) 
+           if (event.target.readyState === "complete") {
+               //alert("hi 2");
+           }
+           });
 </script>
 
 <style>
