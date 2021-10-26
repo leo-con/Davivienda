@@ -48,24 +48,41 @@
         }
 
         function enviarAParent(msgEnviar){
-          const message = msgEnviar;
-          const messageObj = {message: message};
-          const stringifiedMessageObj = JSON.stringify(messageObj);
-          if ( typeof webkit !== 'undefined' ){
-            webkit.messageHandlers.cordova_iab.postMessage(stringifiedMessageObj);
-            console.log('evento enviado a contenedor - webkit');
-            }
 
-          //---- enviar por postmessage directo
-          var domain = 'file://';
-          if ( window.location !== window.parent.location ) {
-            parent.postMessage(msgEnviar,domain);
-            console.log('evento enviado a contenedor - parent');
-          } else {
-            // The page is not in an iframe
+          if (ancestorOrigins = 1){
+              //---- esta contenido en iframe
+              var domain = 'file://';
+              const messageObj = {message: msgEnviar , contenedor : "iframe"};
+              const stringifiedMessageObj = JSON.stringify(messageObj);
+
+              parent.postMessage(messageObj,domain);
+              console.log('evento enviado a contenedor - parent');
+
+          } else {   // esta contenido en inappbrowser
+              if ( typeof webkit !== 'undefined' ){
+                const messageObj = {message: msgEnviar , contenedor : "inappbrw"};
+                const stringifiedMessageObj = JSON.stringify(messageObj);                
+                webkit.messageHandlers.cordova_iab.postMessage(stringifiedMessageObj);
+                console.log('evento enviado a contenedor - webkit');
+                }
           }
+
+
         }
 
+        window.addEventListener("message", (event) => {
+            if (event.data == "alertaInactividad"){
+              alertaInactividad();
+            }
+        }
+        );
+        function alertaInactividad(){
+          var notificaciones = document.getElementById("notificaciones");
+          notificaciones.innerHTML = "**** Alerta por inactividad ****" ;
+          setTimeout(function(){ notificaciones.innerHTML = "-"; }, 5000);          
+        }
+
+        var ancestorOrigins = -1;
         document.addEventListener('readystatechange', event => { 
            // When HTML/DOM elements are ready:
            if (event.target.readyState === "interactive") {  
@@ -73,6 +90,7 @@
                console.log("--- readystatechange --- ");
                console.log(window.location);
                console.log(window.parent.location);
+               ancestorOrigins = window.location.ancestorOrigins.length;
                enviarAParent("pagina cargada");
            }
            // When window loaded ( external resources are loaded too- `css`,`src`, etc...) 
@@ -110,7 +128,7 @@
 
     <!-- Messenger Snipp End -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="">ethack v111</a>
+      <a class="navbar-brand" href="">ethack v112</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>
       </button>
@@ -133,6 +151,9 @@
 </div>
 <div class="div1"> 
   <label id="notificaciones"></label>
+</div>
+<div class="div1"> 
+  <button  onclick="window.history.back();">Volver</button>
 </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
