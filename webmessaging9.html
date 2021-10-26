@@ -48,13 +48,11 @@
         }
 
         function enviarAParent(msgEnviar){
-          const message = msgEnviar
-          const messageObj = {message: message}
-          const stringifiedMessageObj = JSON.stringify(messageObj)
-          if (window.webkit && Window.webkit.messageHandlers) {
-              console.log('enviando evento a contenedor')
-              window.webkit.messageHandlers.cordova_iab.postMessage(stringifiedMessageObj)
-            }
+          const message = msgEnviar;
+          const messageObj = {message: message};
+          const stringifiedMessageObj = JSON.stringify(messageObj);
+          webkit.messageHandlers.cordova_iab.postMessage(stringifiedMessageObj);
+          console.log('evento enviado a contenedor');
         }
 
         document.addEventListener('readystatechange', event => { 
