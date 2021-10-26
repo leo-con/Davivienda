@@ -49,26 +49,13 @@
 
         function enviarAParent(msgEnviar){
 
-          if (ancestorOrigins = 1){
-              //---- esta contenido en iframe
               var domain = 'file://';
-              const messageObj = {message: msgEnviar , contenedor : "iframe"};
+              const messageObj = {message: msgEnviar};
               const stringifiedMessageObj = JSON.stringify(messageObj);
-
-              parent.postMessage(messageObj,domain);
+              parent.postMessage(stringifiedMessageObj,domain);
               console.log('evento enviado a contenedor - parent');
 
-          } else {   // esta contenido en inappbrowser
-              if ( typeof webkit !== 'undefined' ){
-                const messageObj = {message: msgEnviar , contenedor : "inappbrw"};
-                const stringifiedMessageObj = JSON.stringify(messageObj);                
-                webkit.messageHandlers.cordova_iab.postMessage(stringifiedMessageObj);
-                console.log('evento enviado a contenedor - webkit');
-                }
-          }
-
-
-        }
+       }
 
         window.addEventListener("message", (event) => {
             console.log(event);
@@ -85,7 +72,6 @@
           setTimeout(function(){ notificaciones.innerHTML = "-"; }, 5000);          
         }
 
-        var ancestorOrigins = -1;
         document.addEventListener('readystatechange', event => { 
            // When HTML/DOM elements are ready:
            if (event.target.readyState === "interactive") {  
@@ -93,7 +79,6 @@
                console.log("--- readystatechange --- ");
                console.log(window.location);
                console.log(window.parent.location);
-               ancestorOrigins = window.location.ancestorOrigins.length;
                enviarAParent("pagina cargada");
            }
            // When window loaded ( external resources are loaded too- `css`,`src`, etc...) 
