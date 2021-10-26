@@ -51,14 +51,26 @@
           const message = msgEnviar;
           const messageObj = {message: message};
           const stringifiedMessageObj = JSON.stringify(messageObj);
-          webkit.messageHandlers.cordova_iab.postMessage(stringifiedMessageObj);
-          console.log('evento enviado a contenedor');
+          if ( webkit !== undefined){
+            webkit.messageHandlers.cordova_iab.postMessage(stringifiedMessageObj);
+            console.log('evento enviado a contenedor - webkit');
+            }
+
+          //---- enviar por postmessage directo
+          var domain = 'file://';
+          if ( window.location !== window.parent.location ) {
+            parent.postMessage(msgEnviar,domain);
+            console.log('evento enviado a contenedor - parent');
+          } else {
+            // The page is not in an iframe
+          }
         }
 
         document.addEventListener('readystatechange', event => { 
            // When HTML/DOM elements are ready:
            if (event.target.readyState === "interactive") {  
                //alert("hi 1");
+               enviarAParent("pagina cargada");
            }
            // When window loaded ( external resources are loaded too- `css`,`src`, etc...) 
            if (event.target.readyState === "complete") {
@@ -95,7 +107,7 @@
 
     <!-- Messenger Snipp End -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="">ethack v109</a>
+      <a class="navbar-brand" href="">ethack v110</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>
       </button>
