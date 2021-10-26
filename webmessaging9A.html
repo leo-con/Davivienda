@@ -60,10 +60,13 @@
         window.addEventListener("message", (event) => {
             console.log(event);
             console.log(event.data);
-            //if (event.data == "alertaInactividad"){
-            //  console.log("----- mensaje del contenedor ----");
-            //  alertaInactividad();
-            //}
+            if (typeof event.data === 'string'){
+            if (event.data == "alertaInactividad"){
+              console.log("----- mensaje del contenedor ----");
+              alertaInactividad();
+            }
+          }
+
         }
         );
         function alertaInactividad(){
