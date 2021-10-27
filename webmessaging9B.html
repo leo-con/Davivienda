@@ -50,7 +50,7 @@
         function enviarAParent(msgEnviar){
           const messageObj = {message: msgEnviar};
           const stringifiedMessageObj = JSON.stringify(messageObj);
-          webkit.messageHandlers.cordova_iab.postMessage(stringifiedMessageObj);
+          (window as any).webkit.messageHandlers.cordova_iab.postMessage(stringifiedMessageObj);
           console.log('evento enviado a contenedor');
         }
 
