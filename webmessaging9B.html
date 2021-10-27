@@ -50,21 +50,24 @@
         function enviarAParent(msgEnviar){
           const messageObj = {message: msgEnviar};
           const stringifiedMessageObj = JSON.stringify(messageObj);
-          (window as any).webkit.messageHandlers.cordova_iab.postMessage(stringifiedMessageObj);
+          webkit.messageHandlers.cordova_iab.postMessage(stringifiedMessageObj);
           console.log('evento enviado a contenedor');
         }
 
-        document.addEventListener('readystatechange', event => { 
-           // When HTML/DOM elements are ready:
-           if (event.target.readyState === "interactive") {  
-               //alert("hi 1");
-           }
-           // When window loaded ( external resources are loaded too- `css`,`src`, etc...) 
-           if (event.target.readyState === "complete") {
-               //alert("hi 2");
-               enviarAParent("pagina cargada");
-           }
-           });
+        //////document.addEventListener('readystatechange', event => { 
+        //////   // When HTML/DOM elements are ready:
+        //////   if (event.target.readyState === "interactive") {  
+        //////       //alert("hi 1");
+        //////   }
+        //////   // When window loaded ( external resources are loaded too- `css`,`src`, etc...) 
+        //////   if (event.target.readyState === "complete") {
+        //////       //alert("hi 2");
+        //////   }
+        //////   });
+
+           window.onload = function() {
+            enviarAParent("pagina cargada");
+            };
 </script>
 
 <style>
@@ -95,7 +98,7 @@
 
     <!-- Messenger Snipp End -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="">ethack v102</a>
+      <a class="navbar-brand" href="">ethack v103</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>
       </button>
