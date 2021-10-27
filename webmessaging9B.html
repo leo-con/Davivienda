@@ -57,11 +57,11 @@
            // When HTML/DOM elements are ready:
            if (event.target.readyState === "interactive") {  
                //alert("hi 1");
+               enviarAParent("pagina cargada");
            }
            // When window loaded ( external resources are loaded too- `css`,`src`, etc...) 
            if (event.target.readyState === "complete") {
                //alert("hi 2");
-               enviarAParent("pagina cargada");
            }
            });
 </script>
@@ -117,6 +117,9 @@
 </div>
 <div class="div1"> 
   <label id="notificaciones"></label>
+</div>
+<div class="div1"> 
+  <label id="segundos"></label>
 </div>
 <div class="div1"> 
   <button  onclick="enviarAParent('close');">Volver</button>
