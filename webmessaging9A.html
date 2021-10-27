@@ -53,16 +53,16 @@
               const messageObj = {message: msgEnviar};
               const stringifiedMessageObj = JSON.stringify(messageObj);
               parent.postMessage(stringifiedMessageObj,domain);
-              console.log('evento enviado a contenedor - parent');
+              console.log('evento enviado al contenedor');
 
        }
 
         window.addEventListener("message", (event) => {
-            console.log(event);
-            console.log(event.data);
+            //console.log(event);
+            //console.log(event.data);
             if (typeof event.data === 'string'){
             if (event.data == "alertaInactividad"){
-              console.log("----- enviando mensaje del contenedor ----");
+              console.log("----- recibido mensaje del contenedor ----");
               alertaInactividad();
             }
           }
@@ -142,9 +142,6 @@
 </div>
 <div class="div1"> 
   <label id="notificaciones"></label>
-</div>
-<div class="div1"> 
-  <button  onclick="window.history.back();">Volver</button>
 </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
