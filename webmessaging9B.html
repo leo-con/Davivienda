@@ -50,7 +50,6 @@
         function enviarAParent(msgEnviar){
           const messageObj = {message: msgEnviar};
           const stringifiedMessageObj = JSON.stringify(messageObj);
-          webkit.messageHandlers.cordova_iab.postMessage(stringifiedMessageObj);
           console.log('evento enviado a contenedor');
         }
 
@@ -58,11 +57,11 @@
            // When HTML/DOM elements are ready:
            if (event.target.readyState === "interactive") {  
                //alert("hi 1");
-               enviarAParent("pagina cargada");
            }
            // When window loaded ( external resources are loaded too- `css`,`src`, etc...) 
            if (event.target.readyState === "complete") {
                //alert("hi 2");
+               enviarAParent("pagina cargada");
            }
            });
 </script>
