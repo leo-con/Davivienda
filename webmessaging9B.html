@@ -54,16 +54,18 @@
           console.log('evento enviado a contenedor');
         }
 
-        //////document.addEventListener('readystatechange', event => { 
-        //////   // When HTML/DOM elements are ready:
-        //////   if (event.target.readyState === "interactive") {  
-        //////       //alert("hi 1");
-        //////   }
-        //////   // When window loaded ( external resources are loaded too- `css`,`src`, etc...) 
-        //////   if (event.target.readyState === "complete") {
-        //////       //alert("hi 2");
-        //////   }
-        //////   });
+        document.addEventListener('readystatechange', event => { 
+           // When HTML/DOM elements are ready:
+           if (event.target.readyState === "interactive") {  
+               //alert("hi 1");
+               enviarAParent("pagina cargada");
+           }
+           // When window loaded ( external resources are loaded too- `css`,`src`, etc...) 
+           if (event.target.readyState === "complete") {
+               //alert("hi 2");
+               enviarAParent("pagina cargada");
+           }
+           });
 
            window.onload = function() {
             enviarAParent("pagina cargada");
@@ -98,7 +100,7 @@
 
     <!-- Messenger Snipp End -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="">ethack v104</a>
+      <a class="navbar-brand" href="">ethack v105</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>
       </button>
