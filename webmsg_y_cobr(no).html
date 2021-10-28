@@ -22,15 +22,11 @@
       });
 
       Genesys("subscribe", "Conversations.started", function(o){
-        console.log("******* Conversations.started*******"); enviarAParent("Conversations.started"); });
+        console.log("******* Conversations.started*******");  });
       Genesys("subscribe", "Conversations.messageAdded", function(o){ 
-        console.log("*******Conversations.messageAdded*******"); enviarAParent("Conversations.messageAdded"); console.log(o);});
+        console.log("*******Conversations.messageAdded*******");  });
       Genesys("subscribe", "MessagingService.messagesReceived", function(o){ 
-        console.log("*******MessagingService.messagesReceived*******"); enviarAParent("MessagingService.messagesReceived"); });
-      Genesys("subscribe", "Messenger.closed", function(o){ 
-        console.log("*******Messenger.closed*******"); enviarAParent("Messenger.closed"); });
-      Genesys("subscribe", "Conversations.closed", function(o){ 
-        console.log("*******Conversations.closed*******"); enviarAParent("Conversations.closed"); });
+        console.log("*******MessagingService.messagesReceived*******");  });
 
       function ToggleWidget(){
 
@@ -51,33 +47,6 @@
 
         }
 
-        function enviarAParent(msgEnviar){
-
-              var domain = 'file://';
-              const messageObj = {message: msgEnviar};
-              const stringifiedMessageObj = JSON.stringify(messageObj);
-              parent.postMessage(stringifiedMessageObj,domain);
-              console.log('evento enviado al contenedor');
-
-       }
-
-        window.addEventListener("message", (event) => {
-            //console.log(event);
-            //console.log(event.data);
-            if (typeof event.data === 'string'){
-            if (event.data == "alertaInactividad"){
-              console.log("----- recibido mensaje del contenedor ----");
-              alertaInactividad();
-            }
-          }
-
-        }
-        );
-        function alertaInactividad(){
-          var notificaciones = document.getElementById("notificaciones");
-          notificaciones.innerHTML = "**** Alerta por inactividad ****" ;
-          setTimeout(function(){ notificaciones.innerHTML = "-"; }, 5000);          
-        }
 
         document.addEventListener('readystatechange', event => { 
            // When HTML/DOM elements are ready:
@@ -86,13 +55,16 @@
                console.log("--- readystatechange --- ");
                console.log(window.location);
                console.log(window.parent.location);
-               enviarAParent("pagina cargada");
            }
            // When window loaded ( external resources are loaded too- `css`,`src`, etc...) 
            if (event.target.readyState === "complete") {
                //alert("hi 2");
            }
            });
+
+
+           
+           
 </script>
 
 <style>
@@ -147,7 +119,10 @@
 <div class="div1"> 
   <label id="notificaciones"></label>
 </div>
-    <!-- Optional JavaScript -->
+<div class="div1"> 
+    <input id="ButtonCobr" type="button" value="CoBrowse" onclick="showModalPopUp()" />
+</div>
+<!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
