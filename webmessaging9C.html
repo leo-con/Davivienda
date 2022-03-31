@@ -112,6 +112,9 @@
           iframe.style.height = "50px";
           console.log("set_height");
         }
+        if (elem_comando.includes("set_focus")) {
+          document.getElementById("genesys-mxg-frame").focus();
+        }
       }
     </script>
 
@@ -180,6 +183,7 @@
         <option value="Messenger.open">Messenger.open</option>
         <option value="Launcher.show">Launcher.show</option>
         <option value="set_height">Iframe set_height</option>
+        <option value="set_focus">Iframe set_focus</option>
       </select>
     </div>
     <div class="div1">
